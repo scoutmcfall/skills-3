@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request, render_template, session
+from flask import Flask, redirect, request, render_template, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined
 
@@ -38,15 +38,18 @@ MOST_LOVED_MELONS = {
 # TODO: replace this comment with your code
 @app.route("/")
 def index():
-    """Return homepage."""
-    username = request.form.get("name")
-    if username in session:
+    """Return homepage.Do I already have something called username in my cookies
+    If not, submit name via form, then send me to top melons"""
+    if "username" in session:
         return redirect("/top-melons")
-    else:
-        session[username] = username
-        #flash("thanks! we'll remember you forever")
-        return render_template("homepage.html")
-   
+        
+    return render_template("homepage.html")
+
+@app.route("/get-name")
+def get_name():
+    username = request.args.get("name", "")#use form in homepage and put info in args
+    session["username"] = username
+    return redirect("/top-melons")
 
 @app.route("/top-melons")
 def top_melons():
