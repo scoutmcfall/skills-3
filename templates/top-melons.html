@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} TOP MELONS {% endblock %}
 {% block content %}
-  <body>
+  
     <div><h1>Welcome, {{name}}!</h1></div>
     {%for melon in melon_dict%}
     <div class="melon-div">
@@ -24,6 +24,5 @@
         <input type="submit">
       </form>
     </div>
-  </body>
-</html>
+  
 {% endblock %}

@@ -39,7 +39,7 @@ MOST_LOVED_MELONS = {
 @app.route("/")
 def index():
     """Return homepage."""
-    username = request.args.get("name")
+    username = request.form.get("name")
     if username in session:
         return redirect("/top-melons")
     else:
@@ -53,7 +53,7 @@ def top_melons():
     """Return page showing the most loved melons"""
     username = request.args.get("name")
     if username in session:
-        return render_template("top-melons.html", melon_dict = MOST_LOVED_MELONS)
+        return render_template("top-melons.html", melon_dict = MOST_LOVED_MELONS, name = "username")
     else:
         return redirect("/")
     
@@ -62,7 +62,7 @@ def top_melons():
 def love_melon():
     melon = request.form.get("melon")
     session[melon]+= 1
-    return render_template("thank-you.html")
+    return render_template("thank-you.html", name = "username")
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
