@@ -42,7 +42,7 @@ def index():
     If not, submit name via form, then send me to top melons"""
     if "username" in session:
         return redirect("/top-melons")
-        
+
     return render_template("homepage.html")
 
 @app.route("/get-name")
@@ -54,9 +54,10 @@ def get_name():
 @app.route("/top-melons")
 def top_melons():
     """Return page showing the most loved melons"""
-    username = request.args.get("name")
-    if username in session:
-        return render_template("top-melons.html", melon_dict = MOST_LOVED_MELONS, name = "username")
+    
+    if "username" in session:
+        username = session["username"]
+        return render_template("top-melons.html", melon_dict = MOST_LOVED_MELONS, name = username)
     else:
         return redirect("/")
     
