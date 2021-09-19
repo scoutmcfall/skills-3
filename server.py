@@ -39,32 +39,30 @@ MOST_LOVED_MELONS = {
 @app.route("/")
 def index():
     """Return homepage."""
-
-    return render_template("homepage.html")
+    username = request.args.get("name")
+    if username in session:
+        return redirect("/top-melons")
+    else:
+        session[username] = username
+        #flash("thanks! we'll remember you forever")
+        return render_template("homepage.html")
+   
 
 @app.route("/top-melons")
 def top_melons():
     """Return page showing the most loved melons"""
+    username = request.args.get("name")
+    if username in session:
+        return render_template("top-melons.html", melon_dict = MOST_LOVED_MELONS)
+    else:
+        return redirect("/")
+    
 
-    return render_template("top-melons.html",
-                           most_loved_melons = MOST_LOVED_MELONS)
-
-@app.route("/login", methods=["POST"])
-def process_login():
-    """Collect user name
-
-    Find the user's login credentials located in the 'request.form'
-    dictionary, look up the user, and store them in the session.
-    """
-    session[name] = name
-    flash ("we got your name!")
-   
-    name = request.form.get("name")
-    session[name] = name
-    flash ("we got your name!")
-    name_list = []
-    return redirect("/top-melons")
-
+@app.route("/love-melon", methods=["POST"])
+def love_melon():
+    melon = request.form.get("melon")
+    session[melon]+= 1
+    return render_template("thank-you.html")
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
