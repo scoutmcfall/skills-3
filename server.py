@@ -65,8 +65,9 @@ def top_melons():
 @app.route("/love-melon", methods=["POST"])
 def love_melon():
     melon = request.form.get("melon")
-    session[melon]+= 1
-    return render_template("thank-you.html", name = "username")
+    username = session["username"]
+    MOST_LOVED_MELONS[melon]['num_loves'] +=1
+    return render_template("thank-you.html", name = username)
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the

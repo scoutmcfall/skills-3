@@ -13,14 +13,14 @@
       
     </div>
     {%endfor%}
+    
     <div>
-      <form>
+      <form method = "post", action = "/love-melon">
         <label>Love a melon</label>
         <select name="melon">
-          <option value="melonid">name</option>
-          <option value="melonid">name</option>
-          <option value="melonid">name</option>
-          <option value="melonid">name</option>
+          {%for melon in melon_dict%}
+          <option value="{{melon}}">{{ melon_dict[melon]['name'] }}</option>
+          {% endfor %}
         </select>
         <input type="submit">
       </form>
