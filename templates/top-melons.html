@@ -3,12 +3,13 @@
 {% block content %}
   
     <div><h1>Welcome, {{name}}!</h1></div>
+    
     {%for melon in melon_dict%}
     <div class="melon-div">
       
-      <h3>{{ melons_dict[0]['name'] }}</h3>
-      <h2>Loved {{ melon_dict[0]['num_loves'] }} times.</h2>
-      <img src="{{ melon_dict[0]['img'] }}" />
+      <h3>{{ melon_dict[melon]['name'] }}</h3>
+      <h2>Loved {{ melon_dict[melon]['num_loves'] }} times.</h2>
+      <img src="{{ melon_dict[melon]['img'] }}" />
       
     </div>
     {%endfor%}
