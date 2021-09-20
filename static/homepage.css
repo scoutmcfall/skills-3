@@ -1,0 +1,25 @@
+body {
+    background-color: lightsalmon;
+
+}
+img {
+    height: 200px;
+    width: 200px;
+    border: green;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    
+  }
+  
+  .melon-div {
+    display: inline-block;
+    padding: 50px;
+    width: 205px;
+  }
+  
+  h1 {
+    font-family: sans-serif;
+    color: limegreen
+  }
